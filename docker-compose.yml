@@ -1,0 +1,25 @@
+version: "3.2"
+
+services:
+  coder:
+    image: coderstation
+    build: .
+    environment:
+      MODE: standalone
+    ports:
+      - "3002:3002"
+  mongodb:
+    image: mongo:6.0.6
+    restart: always
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - /root/web/mongodb/data/db:/data/db
+      - /root/web/mongodb/data/config:/etc/mongo
+    command:
+      - --wiredTigerCacheSizeGB
+      - '1.5'

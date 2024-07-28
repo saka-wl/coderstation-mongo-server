@@ -1,0 +1,11 @@
+/node_modules
+
+/files/file/
+
+*.mp4
+
+*.pptx
+
+*.rp
+
+*.ev6
