@@ -1,0 +1,102 @@
+[{
+  "_id": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "loginId": "1677397815",
+  "loginPwd": "e10adc3949ba59abbe56e057f20f883e",
+  "avatar": "/static/uploads/file-1693206221838-69390867417188537407928980.jpg",
+  "nickname": "saka",
+  "mail": "aywzcmq64@163.com",
+  "qq": "1677397815",
+  "wechat": "saka-wl",
+  "intro": "",
+  "registerDate": "1712900190258",
+  "lastLoginDate": "1712900190258",
+  "points": 60,
+  "enabled": true
+},
+{
+  "_id": {
+    "$oid": "661bb09f68406a334f6531e7"
+  },
+  "loginId": "user1",
+  "loginPwd": "e10adc3949ba59abbe56e057f20f883e",
+  "avatar": "/static/avatar/happy.gif",
+  "nickname": "新用户245917496",
+  "mail": "",
+  "qq": "",
+  "wechat": "",
+  "intro": "",
+  "registerDate": "1713090719542",
+  "lastLoginDate": "1713090719542",
+  "points": 100,
+  "enabled": true
+},
+{
+  "_id": {
+    "$oid": "662f7d762d3c80c6d5c7d9f6"
+  },
+  "loginId": "18951326690",
+  "loginPwd": "e10adc3949ba59abbe56e057f20f883e",
+  "avatar": "/static/avatar/fire.gif",
+  "nickname": "Lzi",
+  "mail": "",
+  "qq": "",
+  "wechat": "",
+  "intro": "",
+  "registerDate": "1714388342985",
+  "lastLoginDate": "1714388342985",
+  "points": 100,
+  "enabled": true
+},
+{
+  "_id": {
+    "$oid": "662f89aedd165a7335c02864"
+  },
+  "loginId": "123",
+  "loginPwd": "e10adc3949ba59abbe56e057f20f883e",
+  "avatar": "/static/avatar/fire.gif",
+  "nickname": "123",
+  "mail": "",
+  "qq": "",
+  "wechat": "",
+  "intro": "",
+  "registerDate": "1714391470997",
+  "lastLoginDate": "1714391470997",
+  "points": 100,
+  "enabled": true
+},
+{
+  "_id": {
+    "$oid": "6634c171dd165a7335c02b74"
+  },
+  "loginId": "111",
+  "loginPwd": "e10adc3949ba59abbe56e057f20f883e",
+  "avatar": "/static/avatar/miao.png",
+  "nickname": "新用户710524615",
+  "mail": "",
+  "qq": "",
+  "wechat": "",
+  "intro": "",
+  "registerDate": "1714733425017",
+  "lastLoginDate": "1714733425017",
+  "points": 104,
+  "enabled": true
+},
+{
+  "_id": {
+    "$oid": "668538454b22b9a08149af47"
+  },
+  "loginId": "ssk",
+  "loginPwd": "e10adc3949ba59abbe56e057f20f883e",
+  "avatar": "/static/avatar/looklook.png",
+  "nickname": "ssk",
+  "mail": "",
+  "qq": "",
+  "wechat": "",
+  "intro": "",
+  "registerDate": "1720006725742",
+  "lastLoginDate": "1720006725742",
+  "points": 100,
+  "enabled": true
+}]

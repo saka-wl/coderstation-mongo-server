@@ -1,0 +1,162 @@
+[{
+  "_id": {
+    "$oid": "661bb56368406a334f653263"
+  },
+  "userId": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "issueId": {
+    "$oid": "661bb50968406a334f653230"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "661b98338c37c6f3487f1b48"
+  },
+  "commentContent": "<p>一个删除头节点，一个删除尾节点</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>class Solution {\n    public int rob(int[] nums) {\n        int numsLen = nums.length;\n        if (numsLen == 1)\n            return nums[0];\n        if (numsLen == 2)\n            return nums[0] &gt; nums[1] ? nums[0] : nums[1];\n\n        int[] dpDeleteHead = new int[numsLen - 1];\n        int[] dpDeleteFoot = new int[numsLen - 1];\n\n        dpDeleteHead[0] = nums[1];\n        dpDeleteHead[1] = nums[1] &gt; nums[2] ? nums[1] : nums[2];\n        dpDeleteFoot[0] = nums[0];\n        dpDeleteFoot[1] = nums[0] &gt; nums[1] ? nums[0] : nums[1];\n\n        for (int i = 2; i &lt; numsLen - 1; i++) {\n            dpDeleteHead[i] = Math.max(dpDeleteHead[i - 1],\n                    dpDeleteHead[i - 2] + nums[i + 1]);\n            dpDeleteFoot[i] = Math.max(dpDeleteFoot[i - 1],\n                    dpDeleteFoot[i - 2] + nums[i]);\n        }\n        return dpDeleteHead[numsLen - 2] &gt; dpDeleteFoot[numsLen - 2] ? dpDeleteHead[numsLen - 2]\n                : dpDeleteFoot[numsLen - 2];\n    }\n}</code></pre></div>",
+  "commentDate": "1713091939855",
+  "commentType": 1
+},
+{
+  "_id": {
+    "$oid": "661bb5a168406a334f65327b"
+  },
+  "userId": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "issueId": {
+    "$oid": "661bb4e268406a334f65322b"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "65ec7a5de73c6cc63aed4232"
+  },
+  "commentContent": "<p>一般用户service层，实现方法上面的注解，如果里面的操作发生异常，则数据回滚；无异常时，则正常提交。</p><p>一般一个服务要操作多个表的时候，需要用到。</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>@Service\npublic class DishServiceImpl implements DishService {\n    /**\n     * 新增菜品和口味\n     * @param dishDTO\n     */\n    @Override\n    @Transactional\n    public void saveWithFlavor(DishDTO dishDTO) {}\n}</code></pre></div><p>用了该注解，别忘记在启动类上开启注解方式的事务管理</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>@SpringBootApplication\n@EnableTransactionManagement //开启注解方式的事务管理\npublic class SkyApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(SkyApplication.class, args);\n        log.info(\"server started\");\n    }\n}</code></pre></div>",
+  "commentDate": "1713092001432",
+  "commentType": 1
+},
+{
+  "_id": {
+    "$oid": "661bb5c268406a334f653293"
+  },
+  "userId": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "issueId": {
+    "$oid": "661bb4c068406a334f653226"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "65ec7a5de73c6cc63aed4232"
+  },
+  "commentContent": "<p>为参数取别名</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>void updateBalanceByIds(@Param(\"amount\") int amount);</code></pre></div>",
+  "commentDate": "1713092034453",
+  "commentType": 1
+},
+{
+  "_id": {
+    "$oid": "661bb5d468406a334f6532ab"
+  },
+  "userId": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "issueId": {
+    "$oid": "661bb47268406a334f653221"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "65ec7a4de73c6cc63aed422a"
+  },
+  "commentContent": "<p>闭包是一个封闭的空间，里面存储了在其他地方会引用到的该作用域的值，在 JavaScript 中是通过作用域链来实现的闭包。</p><p>只要在函数中使用了外部的数据，就创建了闭包，这种情况下所创建的闭包，我们在编码时是不需要去关心的。</p><p>我们还可以通过一些手段手动创建闭包，从而让外部环境访问到函数内部的局部变量，让局部变量持续保存下来，不随着它的上下文环境一起销毁。</p><p>使用闭包可以解决一个全局变量污染的问题。</p><p>如果是自动产生的闭包，我们无需操心闭包的销毁，而如果是手动创建的闭包，可以把被引用的变量设置为 null，即手动清除变量，这样下次 JavaScript 垃圾回收器在进行垃圾回收时，发现此变量已经没有任何引用了，就会把设为 null 的量给回收了。</p>",
+  "commentDate": "1713092052908",
+  "commentType": 1
+},
+{
+  "_id": {
+    "$oid": "661bb5ea68406a334f6532c3"
+  },
+  "userId": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "issueId": {
+    "$oid": "661bb45d68406a334f65321c"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "65ec7a4de73c6cc63aed422a"
+  },
+  "commentContent": "<p>Node.JS 的事件循环分为 6 个阶段：</p><p>● timers 阶段：这个阶段执行 timer（ setTimeout、setInterval ）的回调</p><p>● I/O callbacks 阶段：处理一些上一轮循环中的少数未执行的 I/O 回调</p><p>● idle、prepare 阶段：仅 Node.js 内部使用</p><p>● poll 阶段：获取新的 I/O 事件, 适当的条件下 Node.js 将阻塞在这里</p><p>● check 阶段：执行 setImmediate( ) 的回调</p><p>● close callbacks 阶段：执行 socket 的 close 事件回调</p><p>事件循环的执行顺序为：</p><p>外部输入数据 –-&gt; 轮询阶段（ poll ）-–&gt; 检查阶段（ check ）-–&gt; 关闭事件回调阶段（ close callback ）–-&gt; 定时器检测阶段（ timer ）–-&gt; I/O 事件回调阶段（ I/O callbacks ）-–&gt;闲置阶段（ idle、prepare ）–-&gt;轮询阶段（按照该顺序反复运行）...</p><p>浏览器和 Node.js 环境下，微任务任务队列的执行时机不同</p><p>● 在 Node.js 中，每个任务队列的每个任务执行完毕之后，就会清空这个微任务队列。</p><p>● 浏览器环境下，就两个队列，一个宏任务队列，一个微任务队列。微任务的任务队列是每个宏任务执行完之后执行。</p>",
+  "commentDate": "1713092074666",
+  "commentType": 1
+},
+{
+  "_id": {
+    "$oid": "661bb5ff68406a334f6532db"
+  },
+  "userId": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "issueId": {
+    "$oid": "661bb44568406a334f653217"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "65ec7a4de73c6cc63aed422a"
+  },
+  "commentContent": "<p>柯里化（currying）又称部分求值。一个柯里化的函数首先会接受一些参数，接受了这些参数之后，该函数并不会立即求值，而是继续返回另外一个函数，刚才传入的参数在函数形成的闭包中被保存起来。待到函数被真正需要求值的时候，之前传入的所有参数都会被一次性用于求值。</p><p>举个例子，就是把原本：</p><p>function(arg1,arg2) 变成 function(arg1)(arg2)function(arg1,arg2,arg3) 变成 function(arg1)(arg2)(arg3)function(arg1,arg2,arg3,arg4) 变成 function(arg1)(arg2)(arg3)(arg4)</p><p>总而言之，就是将：</p><p>function(arg1,arg2,…,argn) 变成 function(arg1)(arg2)…(argn)</p>",
+  "commentDate": "1713092095831",
+  "commentType": 1
+},
+{
+  "_id": {
+    "$oid": "661bb61b68406a334f6532f3"
+  },
+  "userId": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "issueId": {
+    "$oid": "661bb42868406a334f653212"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "65ec7a4de73c6cc63aed422a"
+  },
+  "commentContent": "<p>● 浅拷贝：只是拷贝了基本类型的数据，而引用类型数据，复制后也是会发生引用，我们把这种拷贝叫做浅拷贝（浅复制）浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。</p><p>● 深拷贝：在堆中重新分配内存，并且把源对象所有属性都进行新建拷贝，以保证深拷贝的对象的引用图不包含任何原有对象或对象图上的任何对象，拷贝后的对象与原来的对象是完全隔离，互不影响。</p><p>浅拷贝方法</p><ol><li><p>直接赋值</p></li><li><p>Object.assign 方法：可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。当拷贝的 object 只有一层的时候，是深拷贝，但是当拷贝的对象属性值又是一个引用时，换句话说有多层时，就是一个浅拷贝。</p></li><li><p>ES6 扩展运算符，当 object 只有一层的时候，也是深拷贝。有多层时是浅拷贝。</p></li><li><p>Array.prototype.concat 方法</p></li><li><p>Array.prototype.slice 方法</p></li><li><p>jQuery 中的 $.extend：在 jQuery 中，$.extend(deep,target,object1,objectN) 方法可以进行深浅拷贝。deep 如过设为 true 为深拷贝，默认是 false 浅拷贝。</p><p>深拷贝方法</p></li><li><p>$.extend(deep,target,object1,objectN)，将 deep 设置为 true</p></li><li><p>JSON.parse(JSON.stringify)：用 JSON.stringify 将对象转成 JSON 字符串，再用 JSON.parse 方法把字符串解析成对象，一去一来，新的对象产生了，而且对象会开辟新的栈，实现深拷贝。这种方法虽然可以实现数组或对象深拷贝，但不能处理函数。</p></li><li><p>手写递归</p><p>示例代码如下：</p></li></ol><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>function deepCopy(oldObj, newobj) {\n  for (var key in oldObj) {\n    var item = oldObj[key];\n    // 判断是否是对象\n    if (item instanceof Object) {\n      if (item instanceof Function) {\n        newobj[key] = oldObj[key];\n      } else {\n        newobj[key] = {};  //定义一个空的对象来接收拷贝的内容\n        deepCopy(item, newobj[key]); //递归调用\n      }\n\n      // 判断是否是数组\n    } else if (item instanceof Array) {\n      newobj[key] = [];  //定义一个空的数组来接收拷贝的内容\n      deepCopy(item, newobj[key]); //递归调用\n    } else {\n      newobj[key] = oldObj[key];\n    }\n  }\n}</code></pre></div>",
+  "commentDate": "1713092123294",
+  "commentType": 1
+},
+{
+  "_id": {
+    "$oid": "661bb62968406a334f65330b"
+  },
+  "userId": {
+    "$oid": "6618c85e8c37c6f3487f1b2a"
+  },
+  "issueId": {
+    "$oid": "661bb41268406a334f65320d"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "65ec7a4de73c6cc63aed422a"
+  },
+  "commentContent": "<p>因为浮点数的计算存在 round-off 问题，也就是浮点数不能够进行精确的计算。并且：</p><p>● 不仅 JavaScript，所有遵循 IEEE 754 规范的语言都是如此；</p><p>● 在 JavaScript 中，所有的 Number 都是以 64-bit 的双精度浮点数存储的；</p><p>● 双精度的浮点数在这 64 位上划分为 3 段，而这 3 段也就确定了一个浮点数的值，64bit 的划分是“1-11-52”的模式，具体来说：</p><p>○ 就是 1 位最高位（最左边那一位）表示符号位，0 表示正，1 表示负；</p><p>○ 11 位表示指数部分；</p><p>○ 52 位表示尾数部分，也就是有效域部分</p>",
+  "commentDate": "1713092137946",
+  "commentType": 1
+},
+{
+  "_id": {
+    "$oid": "6634c187dd165a7335c02b88"
+  },
+  "userId": {
+    "$oid": "6634c171dd165a7335c02b74"
+  },
+  "issueId": {
+    "$oid": "661bb50968406a334f653230"
+  },
+  "bookId": null,
+  "typeId": {
+    "$oid": "661b98338c37c6f3487f1b48"
+  },
+  "commentContent": "<p>test</p>",
+  "commentDate": "1714733447414",
+  "commentType": 1
+}]

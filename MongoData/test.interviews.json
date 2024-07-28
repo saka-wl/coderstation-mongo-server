@@ -1,0 +1,77 @@
+[{
+  "_id": {
+    "$oid": "661b9fad68406a334f6531b8"
+  },
+  "interviewTitle": "分发饼干",
+  "interviewContent": "<h2>题目</h2><p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p><p><br></p><p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p><p><br></p><p>示例 1:</p><p><br></p><p>输入: g = [1,2,3], s = [1,1]</p><p>输出: 1</p><p>解释:</p><p>你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。</p><p>虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。</p><p>所以你应该输出1。</p><p>示例 2:</p><p><br></p><p>输入: g = [1,2], s = [1,2,3]</p><p>输出: 2</p><p>解释:</p><p>你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。</p><p>你拥有的饼干数量和尺寸都足以让所有孩子满足。</p><p>所以你应该输出2.</p><h2>解答</h2><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>class Solution {\n    public int findContentChildren(int[] g, int[] s) {\n        int res = 0;\n        Arrays.sort(g);\n        Arrays.sort(s);\n        int sIndex = 0;\n        int sLen = s.length;\n        for(int i=0;i &lt; g.length &amp;&amp; sIndex &lt; sLen;i++) {\n            while(sIndex &lt; sLen &amp;&amp; g[i] &gt; s[sIndex]) {\n                sIndex ++;\n            }\n            if(sIndex &lt; sLen &amp;&amp; g[i] &lt;= s[sIndex]) {\n                res ++;\n                sIndex ++;\n            }\n        }\n        return res;\n    }\n}</code></pre></div>",
+  "onShelfDate": "1713086381544",
+  "typeId": {
+    "$oid": "661b982b8c37c6f3487f1b45"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bb76a68406a334f653358"
+  },
+  "interviewTitle": "Promise题目01",
+  "interviewContent": "<h2>题目</h2><p>下面代码的输出结果是什么</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>const pro1 = new Promise((resolve, reject) =&gt; {\n  setTimeout(() =&gt; {\n    resolve(1);\n  }, 1000);\n});\n\nconst pro2 = pro1.then((data) =&gt; {\n  console.log(data);\n  return data + 1;\n});\n\nconst pro3 = pro2.then((data) =&gt; {\n  console.log(data);\n});\n\nconsole.log(pro1, pro2, pro3);\n\nsetTimeout(() =&gt; {\n  console.log(pro1, pro2, pro3);\n}, 2000);</code></pre></div><h2>答案</h2><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>/**\n * 0s : Pending * 3\n * 1s : 1 2\n * 2s : Promise{1} Promise{2} Promise{undefined}  \n */</code></pre></div>",
+  "onShelfDate": "1713092458598",
+  "typeId": {
+    "$oid": "661bb71f68406a334f653354"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bb79468406a334f65335c"
+  },
+  "interviewTitle": "promise题目02",
+  "interviewContent": "<h2>题目</h2><p>下面代码的输出结果是什么</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>new Promise((resolve, reject) =&gt; {\n  resolve();\n})\n  .then((res) =&gt; {\n    console.log(res.toString());\n    return 2;\n  })\n  .catch((err) =&gt; {\n    return 3;\n  })\n  .then((res) =&gt; {\n    console.log(res);\n  }); </code></pre></div><h2>答案</h2><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>/**\n * 3\n */</code></pre></div>",
+  "onShelfDate": "1713092500789",
+  "typeId": {
+    "$oid": "661bb71f68406a334f653354"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bb7f668406a334f653386"
+  },
+  "interviewTitle": "防抖和节流",
+  "interviewContent": "<h2>题目</h2><p>防抖，节流是什么，如何实现 （字节）</p><h2>答案</h2><p>我们在平时开发的时候，会有很多场景会频繁触发事件，比如说搜索框实时发请求，onmousemove、resize、onscroll 等，有些时候，我们并不能或者不想频繁触发事件，这时候就应该用到函数防抖和函数节流。</p><p>函数防抖(debounce)，指的是短时间内多次触发同一事件，只执行最后一次，或者只执行最开始的一次，中间的不执行。</p><p>具体实现如下：</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>/**\n * 函数防抖\n * @param {function} func 一段时间后，要调用的函数\n * @param {number} wait 等待的时间，单位毫秒\n */\nfunction debounce(func, wait) {\n  // 设置变量，记录 setTimeout 得到的 id\n  var timerId = null;\n  return function (...args) {\n    if (timerId) {\n      // 如果有值，说明目前正在等待中，清除它\n      clearTimeout(timerId);\n    }\n    // 重新开始计时\n    timerId = setTimeout(() =&gt; {\n      func(...args);\n    }, wait);\n  }\n}</code></pre></div><p>函数节流(throttle)，指连续触发事件但是在 n 秒中只执行一次函数。即 2n 秒内执行 2 次... 。</p><p>节流如字面意思，会稀释函数的执行频率。</p><p>下面是使用时间戳方式的具体实现：</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>/**\n * \n * @param {要进行节流的函数} func \n * @param {间隔时间} wait \n * @returns \n */\nfunction throttle(func, wait) {\n  var args; // 存储函数参数\n  var previous = 0; // 一开始的默认时间\n  return function () {\n    var now = new Date(); // 获取最新的时间戳\n    args = arguments; // 获取参数\n    // 进行时间戳的判断，如果超出规定时间，则执行\n    if (now - previous &gt; wait) {\n      func.apply(null, args);\n      previous = now;\n    }\n  }\n}</code></pre></div>",
+  "onShelfDate": "1713092598527",
+  "typeId": {
+    "$oid": "65ec7a4de73c6cc63aed422a"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bb85968406a334f6533ad"
+  },
+  "interviewTitle": "目标和",
+  "interviewContent": "<h2>问题</h2><p>给你一个非负整数数组 nums 和一个整数 target 。</p><p><br></p><p>向数组中的每个整数前添加 '+' 或 '-' ，然后串联起所有整数，可以构造一个 表达式 ：</p><p><br></p><p>例如，nums = [2, 1] ，可以在 2 之前添加 '+' ，在 1 之前添加 '-' ，然后串联起来得到表达式 \"+2-1\" 。</p><p>返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。</p><p><br></p><p>示例 1：</p><p><br></p><p>输入：nums = [1,1,1,1,1], target = 3</p><p>输出：5</p><p>解释：一共有 5 种方法让最终目标和为 3 。</p><p>-1 + 1 + 1 + 1 + 1 = 3</p><p>+1 - 1 + 1 + 1 + 1 = 3</p><p>+1 + 1 - 1 + 1 + 1 = 3</p><p>+1 + 1 + 1 - 1 + 1 = 3</p><p>+1 + 1 + 1 + 1 - 1 = 3</p><p>示例 2：</p><p><br></p><p>输入：nums = [1], target = 1</p><p>输出：1</p><h2>答案</h2><p>思路：</p><p>首先，将数字符号为+的数字和记为A，将符号为-的数字和记为B</p><p>然后我们得到：A + B = sum A - B = target，两个式子联立</p><p>得出：A = (sum + target) / 2 = halfVal</p><p>所以，现在只要求nums中任意个数字和为halfVal的组合数</p><p>我们先设dp[j]</p><p>意思是：j代表任取下标i（包括）之前数字的和，dp[j]代表有dp[j]种组合</p><p>然后得到了以下表达式：dp[j] = dp[j] + dp[j - nums[i]]，不放nums[i]的组合个数 和 放nums[i]的组合个数</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>class Solution {\n    public int findTargetSumWays(int[] nums, int target) {\n        int numsLen = nums.length;\n        int sum = 0;\n        for (int i = 0; i &lt; numsLen; i++) {\n            sum += nums[i];\n        }\n        if ((sum + target) % 2 == 1)\n            return 0;\n        int halfVal = (sum + target) / 2;\n        if (halfVal &lt; 0)\n            return 0;\n        int[] dp = new int[halfVal + 1];\n        dp[0] = 1;\n        for (int i = 0; i &lt; numsLen; i++) {\n            for (int j = halfVal; j &gt;= nums[i]; j--) {\n                dp[j] = dp[j] + dp[j - nums[i]];\n\n            }\n        }\n        return dp[halfVal];\n    }\n}</code></pre></div>",
+  "onShelfDate": "1713092697144",
+  "typeId": {
+    "$oid": "661b98338c37c6f3487f1b48"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bbb6ee6c0610e240d427e"
+  },
+  "interviewTitle": "怎么配置redis环境",
+  "interviewContent": "<h2>问题</h2><p>怎么配置redis环境？</p><h2>答案</h2><p>下载和配置</p><p>我下载的是3.0.54版本，下面是下载链接</p><p>https://github.com/microsoftarchive/redis/releases</p><p>下载完以后直接解压，在主目录输入cmd调出控制台</p><p>输入下面的命令启动redis，redis-server.exe redis.windows.conf</p><p>连接客户端命令（在开启服务的情况下，指定端口号）：redis-cli.exe -h localhost -p 6379</p><p>连接客户端命令（在开启服务的情况下，指定端口号），带密码：</p><p>redis-cli.exe -h localhost -p 6379 -a 123456</p><p>退出客户端：exit</p>",
+  "onShelfDate": "1713093486199",
+  "typeId": {
+    "$oid": "65ec7a75e73c6cc63aed4238"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bbda5e6c0610e240d4329"
+  },
+  "interviewTitle": "java中的自定义注解",
+  "interviewContent": "<h2>题目</h2><p>java中如何实现自定义注解？</p><h2>答案</h2><p>自定义注解</p><p>比如，我们要做一个关于数据库的insert和update操作中的对更新数据时间，更新数据人员id，创建数据时间，创建数据人员id的统一处理</p><p>我们先定义一个数据库操作类型的枚举</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>/**\n * 数据库操作类型\n */\npublic enum OperationType {\n    UPDATE,\n    INSERT\n}</code></pre></div><p>然后就可以在持久层中加上注解来简化一些操作</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>@Insert(\"...\")\n@AutoFill(value = OperationType.INSERT)\nvoid insert(Employee employee);</code></pre></div><p>上面的AutoFill注解就相当于在服务层的实现类中的以下代码，来给这项数据加上创建时间以及修改时间，和创建人id和修改人id</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>// 创建时间以及修改时间\nemployee.setCreateTime(LocalDateTime.now());\nemployee.setUpdateTime(LocalDateTime.now());\n// 设置当前这条记录的创建人和修改人的id\nemployee.setCreateUser(BaseContext.getCurrentId());\nemployee.setUpdateUser(BaseContext.getCurrentId());</code></pre></div><p>要实现AutoFill的功能，首先要定义一个注解类型的数据</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>/**\n * 自定义注解，用于某个公共字段需要进行自动填充处理\n */\n@Target(ElementType.METHOD)\n@Retention(RetentionPolicy.RUNTIME)\npublic @interface AutoFill {\n    // 操作类型，insert， update\n    OperationType value();\n}</code></pre></div><p>然后定义一个自定义切面类，注入到spring中，先定义切入点，再加上前置通知</p><div data-language=\"text\" class=\"toastui-editor-ww-code-block\"><pre><code>/**\n * 自定义切面类\n */\n@Aspect\n@Component\n@Slf4j\npublic class AutoFillAspect {\n    // 切入点\n    // mapper 包下面的所以类，方法，同时满足该方法加入了AutoFill注解\n    @Pointcut(\"execution(* com.sky.mapper.*.*(..)) &amp;&amp; @annotation(com.sky.annotation.AutoFill)\")\n    public void autoFillPointCut() {};\n\n    /**\n     * 前置通知，在通知中进行公共字段的赋值\n     */\n    @Before(\"autoFillPointCut()\")\n    public void autoFill(JoinPoint joinPoint) {\n        // 1. 获取当前拦截到的数据库操作类型\n        MethodSignature signature = (MethodSignature) joinPoint.getSignature();\n        AutoFill autoFill = signature.getMethod().getAnnotation(AutoFill.class);  // 获得方法上的注解对象\n        OperationType operationType = autoFill.value();  // 获得操作类型\n        // 2. 获取到当前被拦截方法的实体对象\n        Object[] args = joinPoint.getArgs();\n        if(args == null || args.length == 0) {\n            return;\n        }\n        Object entity = args[0];\n        // 3. 准备赋值的数据，时间，id\n        LocalDateTime now = LocalDateTime.now();\n        Long currentId = BaseContext.getCurrentId();\n        // 4. 根据不同的操作类型，为对应属性通过反射来赋值\n        if(operationType == OperationType.INSERT) {\n            // 为 4 个公共字段赋值\n            try {\n                Method setCreateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_TIME, LocalDateTime.class);\n                Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);\n                Method setCreateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_USER, Long.class);\n                Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, Long.class);\n\n                // 通过反射为对象赋值\n                setCreateTime.invoke(entity, now);\n                setUpdateTime.invoke(entity, now);\n                setCreateUser.invoke(entity, currentId);\n                setUpdateUser.invoke(entity, currentId);\n            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {\n                throw new RuntimeException(e);\n            }\n        }else if(operationType == OperationType.UPDATE) {\n            // 为 2 个公共字段赋值\n            try {\n                Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);\n                Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, Long.class);\n\n                // 通过反射为对象赋值\n                setUpdateTime.invoke(entity, now);\n                setUpdateUser.invoke(entity, currentId);\n            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {\n                throw new RuntimeException(e);\n            }\n        }\n    }\n}</code></pre></div>",
+  "onShelfDate": "1713094053941",
+  "typeId": {
+    "$oid": "65ec7a5de73c6cc63aed4232"
+  }
+}]

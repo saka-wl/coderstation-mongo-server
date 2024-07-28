@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "65ec7a4de73c6cc63aed422a"
+  },
+  "typeName": "JS"
+},
+{
+  "_id": {
+    "$oid": "65ec7a56e73c6cc63aed422f"
+  },
+  "typeName": "数据库"
+},
+{
+  "_id": {
+    "$oid": "65ec7a5de73c6cc63aed4232"
+  },
+  "typeName": "java"
+},
+{
+  "_id": {
+    "$oid": "65ec7a6de73c6cc63aed4235"
+  },
+  "typeName": "spring"
+},
+{
+  "_id": {
+    "$oid": "65ec7a75e73c6cc63aed4238"
+  },
+  "typeName": "redis"
+},
+{
+  "_id": {
+    "$oid": "661b982b8c37c6f3487f1b45"
+  },
+  "typeName": "贪心"
+},
+{
+  "_id": {
+    "$oid": "661b98338c37c6f3487f1b48"
+  },
+  "typeName": "动态规划"
+},
+{
+  "_id": {
+    "$oid": "661bb71f68406a334f653354"
+  },
+  "typeName": "Promise"
+}]
